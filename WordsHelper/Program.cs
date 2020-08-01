@@ -11,18 +11,15 @@ namespace WordsHelper
         {
             string[] nouns = File.ReadAllLines("word_rus.txt");
 
-            string firstNoun = nouns[0];
-
-            List<char> firstNounLetters = firstNoun.ToList();
-
             Console.WriteLine("Input a word, alstublift ");
             string Majorword = Console.ReadLine();
             int amountWords = 0;
             for (int i = 0; i < nouns.Length; i++)
             {
                 string noun = nouns[i];
-                if (noun==Majorword)
-                {continue;
+                if (noun == Majorword)
+                {
+                    continue;
                 }
 
                 bool loopWasBroken = false;
