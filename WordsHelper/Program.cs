@@ -7,6 +7,30 @@ namespace WordsHelper
 {
     class Program
     {
+        static bool можноЛиСоставить(string главноеСлово, string очередноеСлово)
+        {
+            if (очередноеСлово == главноеСлово)
+            {
+                return false;
+            }
+
+            bool циклПрервали = false;
+            List<char> буквыГлавногоСлова = главноеСлово.ToList();
+            foreach (char буква in очередноеСлово)
+            {
+                if (буквыГлавногоСлова.Contains(буква))
+                {
+                    буквыГлавногоСлова.Remove(буква);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
         static void Main(string[] args)
         {
             string[] всеСуществительные = File.ReadAllLines("word_rus.txt");
@@ -18,27 +42,7 @@ namespace WordsHelper
             
             foreach (string слово in всеСуществительные)
             {
-                if (слово == главноеСлово)
-                {
-                    continue;
-                }
-
-                bool циклПрервали = false;
-                List<char> буквыГлавногоСлова = главноеСлово.ToList();
-                foreach (char буква in слово)
-                {
-                    if (буквыГлавногоСлова.Contains(буква))
-                    {
-                        буквыГлавногоСлова.Remove(буква);
-                    }
-                    else
-                    {
-                        циклПрервали = true;
-                        break;
-                    }
-                }
-
-                if (циклПрервали == false)
+                if (можноЛиСоставить(главноеСлово, слово))
                 {
                     списокСлов.Add(слово);
                 }
