@@ -9,44 +9,52 @@ namespace WordsHelper
     {
         static void Main(string[] args)
         {
-            string[] nouns = File.ReadAllLines("word_rus.txt");
+            string[] всеСуществительные = File.ReadAllLines("word_rus.txt");
 
             Console.WriteLine("Input a word, alstublift ");
-            string Majorword = Console.ReadLine();
-            int amountWords = 0;
-            foreach (string noun in nouns)
+            string главноеСлово = Console.ReadLine();
+            
+            List<string> списокСлов = new List<string>();
+            
+            foreach (string слово in всеСуществительные)
             {
-                if (noun == Majorword)
+                if (слово == главноеСлово)
                 {
                     continue;
                 }
 
-                bool loopWasBroken = false;
-                List<char> letters = Majorword.ToList();
-                foreach (char letter in noun)
+                bool циклПрервали = false;
+                List<char> буквыГлавногоСлова = главноеСлово.ToList();
+                foreach (char буква in слово)
                 {
-                    if (letters.Contains(letter))
+                    if (буквыГлавногоСлова.Contains(буква))
                     {
-                        letters.Remove(letter);
+                        буквыГлавногоСлова.Remove(буква);
                     }
                     else
                     {
-                        loopWasBroken = true;
+                        циклПрервали = true;
                         break;
                     }
                 }
 
-                if (loopWasBroken == false)
+                if (циклПрервали == false)
                 {
-                    amountWords++;
-                    Console.WriteLine(noun);
+                    списокСлов.Add(слово);
                 }
             }
 
-            Console.WriteLine("в итоге имеем " + amountWords);
-            if (amountWords == 0)
+            Console.WriteLine("в итоге имеем " + списокСлов.Count);
+            if (списокСлов.Count == 0)
             {
                 Console.WriteLine("нетути");
+            }
+            else
+            {
+                foreach (string сноваСлово in списокСлов)
+                {
+                    Console.WriteLine(сноваСлово);
+                }
             }
         }
     }
