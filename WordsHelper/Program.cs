@@ -14,9 +14,9 @@ namespace WordsHelper
             Console.WriteLine("Input a word, alstublift ");
             string Majorword = Console.ReadLine();
             int amountWords = 0;
-            for (int i = 0; i < nouns.Length; i++)
+            for (int indexOfWord = 0; indexOfWord < nouns.Length; indexOfWord++)
             {
-                string noun = nouns[i];
+                string noun = nouns[indexOfWord];
                 if (noun == Majorword)
                 {
                     continue;
@@ -24,11 +24,11 @@ namespace WordsHelper
 
                 bool loopWasBroken = false;
                 List<char> letters = Majorword.ToList();
-                for (int j = 0; j < noun.Length; j++)
+                for (int indexOfLetter = 0; indexOfLetter < noun.Length; indexOfLetter++)
                 {
-                    if (letters.Contains(noun[j]))
+                    if (letters.Contains(noun[indexOfLetter]))
                     {
-                        letters.Remove(noun[j]);
+                        letters.Remove(noun[indexOfLetter]);
                     }
                     else
                     {
