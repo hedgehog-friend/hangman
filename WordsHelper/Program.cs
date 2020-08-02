@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NUnit.Framework;
 
 namespace WordsHelper
 {
-    class Program
+    [TestFixture]
+    public class Tests
     {
-        static bool можноЛиСоставить(string главноеСлово, string очередноеСлово)
+        [TestCase("слово", "вол", ExpectedResult = true)]
+        [TestCase("слово", "волище", ExpectedResult = false)]
+        [TestCase("слово", "слово", ExpectedResult = false)]
+        public bool МожноЛиСоставить(string главноеСлово, string очередноеСлово)
+        {
+            return Program.МожноЛиСоставить(главноеСлово, очередноеСлово);
+        }
+    }
+    public static class Program
+    {
+        public static bool МожноЛиСоставить(string главноеСлово, string очередноеСлово)
         {
             if (очередноеСлово == главноеСлово)
             {
                 return false;
             }
 
-            bool циклПрервали = false;
             List<char> буквыГлавногоСлова = главноеСлово.ToList();
             foreach (char буква in очередноеСлово)
             {
@@ -42,7 +53,7 @@ namespace WordsHelper
             
             foreach (string слово in всеСуществительные)
             {
-                if (можноЛиСоставить(главноеСлово, слово))
+                if (МожноЛиСоставить(главноеСлово, слово))
                 {
                     списокСлов.Add(слово);
                 }
